@@ -24,6 +24,13 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
+  void _onTappedBar(int value) {
+    setState(() {
+      _selectedIndex = value;
+    });
+    _pageController.jumpToPage(value);
+  }
+
   @override
   Widget build(BuildContext context) {
     final bool isHome = _selectedIndex == 0;
@@ -34,35 +41,36 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 2,
         title: CustomText(
           text: _titles[_selectedIndex],
-          fontSize: ScreenUtil().setSp(isHome ? 25 : 20),
-          color: isHome ? FB_PRIMARY : Colors.black,
-          fontFamily: isHome ? 'Klavika' : 'Frutiger',
-          fontWeight: isHome ? FontWeight.normal : FontWeight.bold,
+          fontSize: 25.sp,
+          color: FB_PRIMARY,
+          fontFamily: isHome ? 'Klavika' : null,
+          fontWeight: FontWeight.bold,
         ),
       ),
       body: PageView(
         controller: _pageController,
+        onPageChanged: (page) {
+          setState(() {
+            _selectedIndex = page;
+          });
+        },
         children: <Widget>[
           const NewsFeedScreen(),
           const NotificationScreen(),
           Center(
             child: CustomText(
               text: 'Profile',
-              fontSize: ScreenUtil().setSp(16),
+              fontSize: 16.sp,
               color: Colors.black,
             ),
           ),
         ],
-        onPageChanged: (page) {
-          setState(() {
-            _selectedIndex = page;
-          });
-        },
       ),
-
       bottomNavigationBar: BottomNavigationBar(
         showSelectedLabels: false,
         showUnselectedLabels: false,
+        currentIndex: _selectedIndex,
+        selectedItemColor: FB_PRIMARY,
         onTap: _onTappedBar,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
@@ -72,16 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
-        selectedItemColor: FB_PRIMARY,
-        currentIndex: _selectedIndex,
       ),
     );
-  }
-
-  void _onTappedBar(int value) {
-    setState(() {
-      _selectedIndex = value;
-    });
-    _pageController.jumpToPage(value);
   }
 }

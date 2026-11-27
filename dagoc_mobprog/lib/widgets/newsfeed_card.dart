@@ -87,12 +87,13 @@ class _NewsFeedCardState extends State<NewsFeedCard> {
                           CustomText(
                             text: widget.date,
                             fontSize: 12.sp,
-                            color: Colors.grey,
+                            color: Colors.grey[600]!,
+                            fontWeight: FontWeight.normal,
                           ),
                           SizedBox(width: 4.w),
                           Icon(
                             Icons.public,
-                            color: Colors.grey,
+                            color: Colors.grey[600],
                             size: 14.sp,
                           ),
                         ],
@@ -107,8 +108,9 @@ class _NewsFeedCardState extends State<NewsFeedCard> {
 
             CustomText(
               text: widget.postContent,
-              fontSize: 12.sp,
-              color: Colors.black,
+              fontSize: 13.sp,
+              color: Colors.black87,
+              fontWeight: FontWeight.normal,
             ),
             SizedBox(height: 8.h),
 
@@ -124,12 +126,14 @@ class _NewsFeedCardState extends State<NewsFeedCard> {
                   text: '$_heartsCount ${_heartsCount == 1 ? 'Heart' : 'Hearts'}',
                   fontSize: 12.sp,
                   color: Colors.grey[700]!,
+                  fontWeight: FontWeight.normal,
                 ),
                 if (widget.numOfComments > 0)
                   CustomText(
                     text: '${widget.numOfComments} Comments',
                     fontSize: 12.sp,
                     color: Colors.grey[700]!,
+                    fontWeight: FontWeight.normal,
                   ),
               ],
             ),
@@ -177,8 +181,9 @@ class _NewsFeedCardState extends State<NewsFeedCard> {
                     ),
                     child: CustomText(
                       text: 'Write a comment...',
-                      fontSize: 11.sp,
+                      fontSize: 12.sp,
                       color: Colors.grey[700]!,
+                      fontWeight: FontWeight.normal,
                     ),
                   ),
                 ),
@@ -188,8 +193,8 @@ class _NewsFeedCardState extends State<NewsFeedCard> {
             CustomText(
               text: 'View comments',
               fontSize: 12.sp,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
+              fontWeight: FontWeight.normal,
+              color: Colors.grey[700]!,
             ),
           ],
         ),
@@ -264,6 +269,7 @@ class PostImageWidget extends StatelessWidget {
                   text: 'Image placeholder ($resolvedPath)',
                   fontSize: 11.sp,
                   color: Colors.grey[700]!,
+                  fontWeight: FontWeight.normal,
                 ),
               ],
             ),

@@ -6,7 +6,7 @@ class CustomText extends StatelessWidget {
     required this.text,
     required this.fontSize,
     required this.color,
-    this.fontFamily = 'Klavika',
+    this.fontFamily,
     this.fontWeight = FontWeight.normal,
     this.textAlign = TextAlign.left,
     this.letterSpacing = 0,
@@ -20,7 +20,7 @@ class CustomText extends StatelessWidget {
   final Color color;
   final FontWeight fontWeight;
   final TextAlign textAlign;
-  final String fontFamily;
+  final String? fontFamily;
   final FontStyle fontStyle;
   final int? maxLines;
   final TextOverflow? overflow;
