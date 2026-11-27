@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'screens/home_screen.dart';
 import 'screens/newsfeed_screen.dart';
+import 'screens/notification_screen.dart';
+import 'constants.dart';
 
 void main() => runApp(const DagocFacebook());
 
@@ -14,13 +16,20 @@ class DagocFacebook extends StatelessWidget {
       designSize: const Size(412, 715),
       minTextAdapt: true,
       splitScreenMode: true,
-      builder: (_, child) {
+      builder: (context, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'Facebook Replication',
+          title: APP_NAME,
+          theme: ThemeData(
+            useMaterial3: true,
+            colorScheme: ColorScheme.fromSeed(seedColor: FB_PRIMARY),
+          ),
           initialRoute: '/home',
           routes: {
             '/newsfeed': (context) => const NewsFeedScreen(),
+            '/notification': (context) => const Scaffold(
+                  body: SafeArea(child: NotificationScreen()),
+                ),
             '/home': (context) => const HomeScreen(),
           },
         );

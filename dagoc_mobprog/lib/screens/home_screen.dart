@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../constants.dart';
-import 'newsfeed_screen.dart';
 import '../widgets/custom_text.dart';
+import 'newsfeed_screen.dart';
+import 'notification_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -15,36 +16,40 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
   final PageController _pageController = PageController();
 
-  void _onTappedBar(int value) {
-    setState(() {
-      _selectedIndex = value;
-    });
-    _pageController.jumpToPage(value);
+  final List<String> _titles = [APP_NAME, 'Notifications', 'Profile'];
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final bool isHome = _selectedIndex == 0;
+
     return Scaffold(
       appBar: AppBar(
         shadowColor: FB_TEXT_COLOR_WHITE,
         elevation: 2,
         title: CustomText(
-          text: 'facebook',
-          fontSize: 25.sp,
-          color: FB_PRIMARY,
-          fontFamily: 'Klavika',
-          fontWeight: FontWeight.bold,
+          text: _titles[_selectedIndex],
+          fontSize: ScreenUtil().setSp(isHome ? 25 : 20),
+          color: isHome ? FB_PRIMARY : Colors.black,
+          fontFamily: isHome ? 'Klavika' : 'Frutiger',
+          fontWeight: isHome ? FontWeight.normal : FontWeight.bold,
         ),
       ),
       body: PageView(
         controller: _pageController,
         children: <Widget>[
           const NewsFeedScreen(),
-          const Center(
+          const NotificationScreen(),
+          Center(
             child: CustomText(
-              text: 'Notifications',
-              fontSize: 18,
-              color: Colors.black54,
+              text: 'Profile',
+              fontSize: ScreenUtil().setSp(16),
+              color: Colors.black,
             ),
           ),
         ],
@@ -54,23 +59,29 @@ class _HomeScreenState extends State<HomeScreen> {
           });
         },
       ),
+
       bottomNavigationBar: BottomNavigationBar(
         showSelectedLabels: false,
         showUnselectedLabels: false,
         onTap: _onTappedBar,
         items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(
             icon: Icon(Icons.notifications),
             label: 'Notifications',
           ),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
         selectedItemColor: FB_PRIMARY,
         currentIndex: _selectedIndex,
       ),
     );
+  }
+
+  void _onTappedBar(int value) {
+    setState(() {
+      _selectedIndex = value;
+    });
+    _pageController.jumpToPage(value);
   }
 }

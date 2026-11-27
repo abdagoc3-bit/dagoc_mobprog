@@ -12,3 +12,8 @@ I did it again on my personal computer and encountered multiple challenges while
 Laboratory 1: Discussion
 
 In 'newsfeed_card.dart', I made the post image dynamic through the use of 'hasImage'. If it has one, it loads the picture but if not, that part will just be hidden. I also set the owl image as the default in case no image path is given, and keep the placeholder box with an icon and text in case the picture doesn't load properly. Aside from that, I made separate widgets for user's avatar and the love button with the heart count, and used 'flutter_screenutil' so the sizes adjust depending on the screen. 
+
+
+Laboratory 2: Discussion
+
+The biggest challenge I ran into while working on this laboratory 2 for enhancement was getting a lot of errors when I tried running the app on an emulator. I ran "flutter analyze" to figure out what went wrong, and it turned out that the issue was just because my project folder was saved inside OneDrive. So to fix it, I was required to pause OneDrive syncing before opening the project in VS Code. After that, I ran "flutter analyze" again to make sure everything is good and would work well, and then used "flutter clean" and "flutter pub get" to reset things before finally running the app with "flutter run".
